@@ -1,4 +1,5 @@
 ## brutemq
+[![Build Status](https://travis-ci.org/codexlynx/brutemq.svg?branch=master)](https://travis-ci.org/codexlynx/brutemq)
 --------
 High performance RabbitMQ (amqp) Brute Force tool.
 

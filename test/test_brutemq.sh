@@ -13,4 +13,5 @@ echo ${PASSWORD} >> pass.txt
 sleep 20
 ./brutemq -u admin -f pass.txt --url localhost:5672/
 
+echo
 docker stop ${CONTAINER_ID}
