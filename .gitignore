@@ -1,3 +1,5 @@
 .*
 !.gitignore
+!.travis.yml
+vendor/**/.travis.yml
 *.txt

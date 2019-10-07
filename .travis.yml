@@ -1,0 +1,13 @@
+language: go
+
+go:
+  - 1.12.9
+
+before_install:
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
+
+install:
+  - go build
+
+script: test/test_brutemq.sh
