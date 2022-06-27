@@ -1,4 +1,7 @@
 FROM golang:1.18.3-alpine3.16 AS builder
+
+LABEL org.opencontainers.image.source=https://github.com/codexlynx/brutemq
+
 WORKDIR /go/src/github.com/codexlynx/brutemq
 RUN apk add gcc musl-dev --no-cache
 
