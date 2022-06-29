@@ -7,26 +7,31 @@ import (
 	"log"
 )
 
-var endpoint string
+var (
+	amqpEndpoint string
+	amqpUser     string
+)
 
 var amqpCmd = &cobra.Command{
 	Use:     "amqp",
 	Short:   "Bruteforce AMQP Plain service endpoint",
 	Aliases: []string{"a", "am", "amq"},
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Println("AMQP Plain endpoint:", endpoint)
-		log.Println("AMQP Plain user:", user)
-
 		bruteAmqp := amqp.BruteAmqpPlain{
-			Endpoint: endpoint,
-			User:     user,
+			Endpoint: amqpEndpoint,
+			User:     amqpUser,
 		}
+
 		brute := bruteforcer.NewBruterforcerFile(bruteAmqp.TryPassword, threads, dictionary)
+		log.Println("AMQP Plain endpoint:", amqpEndpoint)
+		log.Println("AMQP Plain user:", amqpUser)
+
 		brute.Start()
 	},
 }
 
 func init() {
-	amqpCmd.PersistentFlags().StringVarP(&endpoint, "endpoint", "e", "localhost:5672/vhost", "AMQP Plain endpoint")
+	amqpCmd.PersistentFlags().StringVarP(&amqpEndpoint, "endpoint", "e", "localhost:5672/vhost", "AMQP Plain endpoint")
+	amqpCmd.PersistentFlags().StringVarP(&amqpUser, "user", "u", "admin", "AMQP Plain username")
 	rootCmd.AddCommand(amqpCmd)
 }

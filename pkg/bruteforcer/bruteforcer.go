@@ -23,10 +23,9 @@ func Try(forcer *BruteForcer, wg *sync.WaitGroup, sem chan int, password string,
 	if ok {
 		log.Println("Password", password, "found!")
 		ctxCancel()
-
-		if err != nil {
-			log.Println(err)
-		}
+	}
+	if err != nil {
+		log.Println(err)
 	}
 	<-sem
 }

@@ -4,7 +4,7 @@ build-oci:
 	@docker build -f Containerfile -t brutemq .
 
 test:
-	@bash test/*.sh
+	@for test in $$(echo test/*.sh); do bash "$${test}"; done
 
 gofmt:
 	@gofmt -s -w .
