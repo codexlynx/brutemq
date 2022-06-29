@@ -1,27 +1,22 @@
 package amqp
 
 import (
+	"errors"
 	"fmt"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-type BruteAmqp struct {
+type BruteAmqpPlain struct {
 	Endpoint string
 	User     string
 }
 
-func (brute *BruteAmqp) TryPassword(password string) (bool, error) {
+func (brute *BruteAmqpPlain) TryPassword(password string) (bool, error) {
 	endpoint := fmt.Sprintf("amqp://%s:%s@%s", brute.User, password, brute.Endpoint)
 	conn, err := amqp.Dial(endpoint)
-	if err != nil {
-		return false, err
+	if errors.Is(err, amqp.ErrCredentials) {
+		return false, nil
 	}
 	defer conn.Close()
-	ch, err := conn.Channel()
-	if err != nil {
-		return false, err
-	}
-	defer ch.Close()
-	conn.ConnectionState()
-	return true, nil
+	return true, err
 }

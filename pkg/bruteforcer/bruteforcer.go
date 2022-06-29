@@ -15,17 +15,25 @@ type BruteForcer struct {
 	TryFunc         func(input string) (bool, error)
 }
 
+const version = "0.2.1"
+
 func Try(forcer *BruteForcer, wg *sync.WaitGroup, sem chan int, password string, ctxCancel context.CancelFunc) {
 	defer wg.Done()
-	ok, _ := forcer.TryFunc(password)
+	ok, err := forcer.TryFunc(password)
 	if ok {
 		log.Println("Password", password, "found!")
 		ctxCancel()
+
+		if err != nil {
+			log.Println(err)
+		}
 	}
 	<-sem
 }
 
 func (forcer *BruteForcer) Start() {
+	log.Println("Attacking...")
+
 	scanner := bufio.NewScanner(forcer.PasswordsReader)
 
 	var sem = make(chan int, forcer.ConcurrentLimit)
@@ -50,7 +58,8 @@ ScannerLoop:
 	close(sem)
 }
 
-func StartBruteforcerWithFile(tryFunc func(input string) (bool, error), limit int, filepath string) {
+func NewBruterforcerFile(tryFunc func(input string) (bool, error), limit int, filepath string) BruteForcer {
+	log.Println("brutemq", version, "/ An exotic service bruteforce tool")
 	passwords, err := os.Open(filepath)
 	if err != nil {
 		log.Fatalln(err)
@@ -62,5 +71,5 @@ func StartBruteforcerWithFile(tryFunc func(input string) (bool, error), limit in
 		TryFunc:         tryFunc,
 	}
 
-	brute.Start()
+	return brute
 }
