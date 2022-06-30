@@ -14,7 +14,7 @@ var (
 
 var amqpCmd = &cobra.Command{
 	Use:     "amqp",
-	Short:   "Bruteforce AMQP Plain service endpoint",
+	Short:   "Bruteforce AMQP PLAIN SASL service endpoint",
 	Aliases: []string{"a", "am", "amq"},
 	Run: func(cmd *cobra.Command, args []string) {
 		bruteAmqp := amqp.BruteAmqpPlain{
@@ -31,7 +31,7 @@ var amqpCmd = &cobra.Command{
 }
 
 func init() {
-	amqpCmd.PersistentFlags().StringVarP(&amqpEndpoint, "endpoint", "e", "localhost:5672/vhost", "AMQP Plain endpoint")
-	amqpCmd.PersistentFlags().StringVarP(&amqpUser, "user", "u", "admin", "AMQP Plain username")
+	amqpCmd.PersistentFlags().StringVarP(&amqpEndpoint, "endpoint", "e", "localhost:5672/vhost", "AMQP PLAIN SASL endpoint")
+	amqpCmd.PersistentFlags().StringVarP(&amqpUser, "user", "u", "admin", "AMQP PLAIN SASL username")
 	rootCmd.AddCommand(amqpCmd)
 }

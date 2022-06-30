@@ -51,7 +51,6 @@ func NewBruteEtcd(endpoint string, user string) (*BruteEtcd, error) {
 	if err != nil {
 		return nil, err
 	}
-	//defer client.Close()
 
 	return &BruteEtcd{
 		Endpoint: endpoint,

@@ -10,4 +10,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and test
+        shell: 'script -q -e -c "bash {0}"' # https://github.com/actions/runner/issues/241
         run: make all
