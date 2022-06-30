@@ -25,8 +25,8 @@ var amqpCmd = &cobra.Command{
 
 		metadata := fmt.Sprintf("amqp://%s@%s", amqpUser, amqpEndpoint)
 		brute := bruteforcer.NewBruterforcerFile(bruteAmqp.TryPassword, threads, metadata, dictionary)
-		log.Println("AMQP Plain endpoint:", amqpEndpoint)
-		log.Println("AMQP Plain user:", amqpUser)
+		log.Println("AMQP PLAIN SASL endpoint:", amqpEndpoint)
+		log.Println("AMQP PLAIN SASL user:", amqpUser)
 
 		brute.Start()
 	},

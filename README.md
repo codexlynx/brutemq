@@ -22,23 +22,29 @@ You can compile the binary or run via OCI image.
 
 #### OCI Image:
 
-> $ docker run ghcr.io/codexlynx/brutemq:latest
+> $ docker run --net=host ghcr.io/codexlynx/brutemq:latest
 
 Add to your shell profile:
 ```
 function brutemq {
-    docker run ghcr.io/codexlynx/brutemq:latest $@
+    docker run --net=host ghcr.io/codexlynx/brutemq:latest $@
 }
 ```
 Or
 ```
-alias brutemq='docker run ghcr.io/codexlynx/brutemq:latest'
+alias brutemq='docker run --net=host ghcr.io/codexlynx/brutemq:latest'
 ```
 
 For more details click [here](https://github.com/codexlynx/brutemq/pkgs/container/brutemq).
 
 ### Webhook:
 Set `WEBHOOK_URL` environment variable to send an http webhook request when the password is discovered.
+
+### Kubernetes:
+You can launch brutemq on a Kubernetes cluster for various reasons, either because you can't set up port-forwarding and 
+want to attack an endpoint on one of the cluster's internal networks (lack of permissions in RBAC or other limitations) 
+or simply because you want to manage the workload on your own cluster. Check the `deployments` directory and set the 
+[manifest](deployments/kubernetes_job.yaml) to your needs.
 
 ### Usage:
 

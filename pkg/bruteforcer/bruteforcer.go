@@ -24,11 +24,11 @@ const version = "0.2.1"
 func SendWebhook(data interface{}) {
 	webhookUrl, ok := os.LookupEnv("WEBHOOK_URL")
 	if ok {
-		serializeData, err := json.Marshal(data)
+		serializedData, err := json.Marshal(data)
 		if err != nil {
 			log.Println(err)
 		}
-		_, err = http.Post(webhookUrl, "application/json", bytes.NewBuffer(serializeData))
+		_, err = http.Post(webhookUrl, "application/json", bytes.NewBuffer(serializedData))
 		if err != nil {
 			log.Println(err)
 		}
