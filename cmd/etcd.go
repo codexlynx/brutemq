@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/codexlynx/brutemq/pkg/bruteforcer"
 	"github.com/codexlynx/brutemq/pkg/etcd"
 	"github.com/spf13/cobra"
@@ -23,7 +24,8 @@ var etcdCmd = &cobra.Command{
 		}
 		defer bruteEtcd.Close()
 
-		brute := bruteforcer.NewBruterforcerFile(bruteEtcd.TryPassword, threads, dictionary)
+		metadata := fmt.Sprintf("etcd://%s@%s", etcdUser, etcdEndpoint)
+		brute := bruteforcer.NewBruterforcerFile(bruteEtcd.TryPassword, threads, metadata, dictionary)
 		log.Println("etcdv3 endpoint:", etcdEndpoint)
 		log.Println("etcdv3 user:", etcdUser)
 

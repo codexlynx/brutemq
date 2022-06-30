@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/codexlynx/brutemq/pkg/bruteforcer"
 	"github.com/codexlynx/brutemq/pkg/vault"
 	"github.com/spf13/cobra"
@@ -22,7 +23,8 @@ var vaultCmd = &cobra.Command{
 			User:     vaultUser,
 		}
 
-		brute := bruteforcer.NewBruterforcerFile(bruteVault.TryPassword, threads, dictionary)
+		description := fmt.Sprintf("vault://%s@%s", vaultUser, vaultEndpoint)
+		brute := bruteforcer.NewBruterforcerFile(bruteVault.TryPassword, threads, description, dictionary)
 		log.Println("HashiCorp Vault endpoint:", vaultEndpoint)
 		log.Println("HashiCorp Vault user:", vaultUser)
 

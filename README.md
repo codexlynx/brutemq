@@ -37,6 +37,9 @@ alias brutemq='docker run ghcr.io/codexlynx/brutemq:latest'
 
 For more details click [here](https://github.com/codexlynx/brutemq/pkgs/container/brutemq).
 
+### Webhook:
+Set `WEBHOOK_URL` environment variable to send an http webhook request when the password is discovered.
+
 ### Usage:
 
 ```

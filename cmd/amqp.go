@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/codexlynx/brutemq/pkg/amqp"
 	"github.com/codexlynx/brutemq/pkg/bruteforcer"
 	"github.com/spf13/cobra"
@@ -22,7 +23,8 @@ var amqpCmd = &cobra.Command{
 			User:     amqpUser,
 		}
 
-		brute := bruteforcer.NewBruterforcerFile(bruteAmqp.TryPassword, threads, dictionary)
+		metadata := fmt.Sprintf("amqp://%s@%s", amqpUser, amqpEndpoint)
+		brute := bruteforcer.NewBruterforcerFile(bruteAmqp.TryPassword, threads, metadata, dictionary)
 		log.Println("AMQP Plain endpoint:", amqpEndpoint)
 		log.Println("AMQP Plain user:", amqpUser)
 
