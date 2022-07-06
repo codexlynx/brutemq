@@ -7,6 +7,10 @@ Services supported:
 * etcd v3
 * AMQP PLAIN SASL
 
+### History:
+Brutemq was a tool initially designed to brute force rabbitmq (amqp) queue messaging services. 
+After implementing the first working version, new needs arose and etcd and HashiCorp Vault Userpass services were added.
+
 ### Run:
 
 You can compile the binary or run via OCI image.
