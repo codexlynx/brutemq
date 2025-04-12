@@ -76,3 +76,25 @@ Use "brutemq [command] --help" for more information about a command.
 #### Example:
 
 > $ brutemq amqp -d passwords.txt -u admin -e localhost:5672/ -t 500
+
+### Citations and Acknowledgments
+
+This project has been cited in the following scholarly article:
+
+(2025) [Signature-Based Security Analysis and Detection of IoT Threats in Advanced Message Queuing Protocol](https://www.researchgate.net/publication/389061257_Signature-Based_Security_Analysis_and_Detection_of_IoT_Threats_in_Advanced_Message_Queuing_Protocol).
+
+> Mohammad Emran Hashimyar, Mahdi Aiash, Ali Khoshkholghi and Giacomo Nalli. __Middlesex University, London__
+```bibtex
+@article{article,
+  author = {Hashimyar, Mohammad and Aiash, Mahdi and Khoshkholghi, Ali and Nalli, Giacomo},
+  year = {2025},
+  month = {02},
+  pages = {5},
+  title = {Signature-Based Security Analysis and Detection of IoT Threats in Advanced Message Queuing Protocol},
+  volume = {5},
+  journal = {Network},
+  doi = {10.3390/network5010005}
+}
+```
+
+We appreciate the citation and use of this project.
